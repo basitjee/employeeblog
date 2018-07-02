@@ -1,0 +1,264 @@
+<!-- Start Sidebar Search -->
+<div id="search-content" class="search-overlay">
+  <a href="javascript:void(0)" id="search-close-btn" class="close-btn"><i class="mdi mdi-close"></i></a>
+  <div class="search-overlay-content">
+    <div class="container">
+      <form method="get" id="headsearchform" class="headsearchform" action="#">
+        <div class="input-group">
+          <input type="text" class="form-control" value="" name="headerSearch" id="headerSearch" placeholder="Type and hit enter....." aria-label="Type and hit enter">
+          <div class="input-group-append">
+            <button class="search-btn" type="submit" form="headsearchform"><i class="mdi mdi-magnify"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Start Header -->
+<header class="header">
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="topbar-left">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="mailto:{{user['email']}}" class="contact-list-item text-dim"><i class="mdi mdi-email"></i>{{user['email']}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="topbar-right">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="tel:+92 3204344751" class="contact-list-item text-dim"><i class="mdi mdi-phone"></i>+92 3204344751</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="topbar-right">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><button (click)="logout()" class="contact-list-item text-dim">Sign Out</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="headerbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-3 col-md-3">
+
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="logobar text-center">
+            <img src="../../assets/images/logo_small_manager.png" class="img img-responsive" alt="logo">
+          </div>
+        </div>
+        <div class="col-3 col-md-3">
+          <div class="searchbar text-right">
+            <a id="search-open-btn" class="btn-header">
+              <i class="mdi mdi-magnify"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- End Header -->
+
+<!-- Start Blog List -->
+<section class="content-section">
+  <div class="container">
+    <h2 align="center">Total Posts: {{postCount}}</h2>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="box box-warning">
+          <div class="box-header with-border">
+            <h5 class="box-title">New Post</h5>
+          </div>
+          <div class="alert alert-danger alert-dismissible" *ngIf="invalidPostData === true">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            Please fill all fields.
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <form role="form">
+              <!-- text input -->
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="postTitle" [(ngModel)]="post.post_title" class="form-control" [required]="post.post_title">
+              </div>
+              <!-- textarea -->
+              <div class="form-group">
+                <label>Body</label>
+                <textarea class="form-control" name="postBody" [(ngModel)]="post.post_content"  rows="5" required></textarea>
+              </div>
+              <div class="box-footer">
+                <input type="submit" (click)="newPost()" class="btn btn-primary pull-right" value="Submit">
+              </div>
+            </form>
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="page-main">
+          <div class="blog-list-box border-gradient-info mb-30" id="postCard" *ngFor="let post of posts">
+            <div class="blog-head">
+            </div>
+            <div class="blog-content">
+              <div class="blog-content-head">
+                <div class="row">
+                  <div class="col-sm-7">
+                    <div class="blog-content-cate">
+                      <ul class="list-inline">
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="blog-content-date">
+                      <p>{{post['created_at']}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-content-body">
+                <h2 class="blog-title mb-20"><a href="#">{{post['title']}}</a></h2>
+                <p class="blog-desc mb-30">{{post['content']}}</p>
+              </div>
+              <div class="blog-content-footer">
+                <div class="row">
+                  <div class="col-sm-5">
+                  </div>
+                  <div class="col-sm-7">
+                    <div class="blog-content-social">
+                      <ul class="list-inline social mb-0">
+                        <li class="list-inline-item"><a href="#" class="social-icon text-dim"><i class="mdi mdi-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-icon text-dim"><i class="mdi mdi-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-icon text-dim"><i class="mdi mdi-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-icon text-dim"><i class="mdi mdi-google-plus"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-icon text-dim"><i class="mdi mdi-linkedin"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngFor="let comment of comments">
+              <div class="box-header with-border" *ngIf="post['id'] === comment['blogpost_id']" >
+                {{incrementComment()}}
+              </div>
+            </ng-container>
+            <div class="blog-footer">
+              <div class="row">
+                <div class="col-sm-4">
+                  <p class="mb-0 blog-author"><span class="text-dim"><i class="mdi mdi-account"></i> Author : </span>{{user['name']}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <p class="mb-0 blog-views"></p>
+                </div>
+                <div class="col-sm-4">
+                  <p class="mb-0 blog-comment"><span class="text-dim"><i class="mdi mdi-comment-processing"></i> Total Comments : </span>{{commentCount}}</p>
+                  {{resetCommentCount()}}
+                </div>
+              </div>
+            </div>
+
+            <button class="collapsible" (click)="expandComments()">Read Comments (double click to open)</button>
+            <div class="content">
+              <br/>
+              <ng-container *ngFor="let comment of comments">
+                <ng-container *ngIf="post['id'] === comment['blogpost_id']" >
+                  <h6>{{comment['name']}} - {{comment['email']}}</h6>
+                  <label>{{comment['content']}}</label>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-sidebar">
+
+          <div class="widget widget-about border-gradient-info mb-30">
+            <div class="widget-title">
+              <h4>About Me</h4>
+            </div>
+            <div class="widget-content text-center">
+              <img src="../../assets/images/download.png" alt="about">
+              <div class="about-content">
+                <a href="about.html" class="btn about-name btn-gradient-cate-info">{{user['name']}}</a>
+                <p class="mb-0"></p>
+              </div>
+            </div>
+          </div>
+          <div class="widget widget-follows border-gradient-pri mb-30">
+            <div class="widget-title">
+              <h4>Follow Me</h4>
+            </div>
+            <div class="widget-content">
+              <ul class="list-inline social mt-20 mb-0">
+                <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-google-plus"></i></a></li>
+                <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="widget widget-contact border-gradient-reg mb-30">
+            <div class="widget-title">
+              <h4>Contact Me</h4>
+            </div>
+            <div class="widget-content">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="mdi mdi-map-marker"></i> {{user['username']}}</li>
+                <li class="list-group-item"><i class="mdi mdi-phone"></i> +92 3204344751</li>
+                <li class="list-group-item"><i class="mdi mdi-email"></i> {{user['email']}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Blog List -->
+
+<!-- Start Footer -->
+<footer class="footer section text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="footer-logo">
+          <img src="../../assets/images/logo_small_manager.png" class="img img-responsive" alt="logo">
+        </div>
+        <div class="footer-social">
+          <ul class="list-inline social mb-0">
+            <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-facebook"></i> Facebook</a></li>
+            <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-twitter"></i> Twitter</a></li>
+            <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-instagram"></i> Instagram</a></li>
+            <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-google-plus"></i> Google +</a></li>
+            <li class="list-inline-item"><a href="#" class="social-icon"><i class="mdi mdi-linkedin"></i> LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="footer-copyright">
+          <p class="copy-rights mb-0">Evaluation Task</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- End Footer -->
+
+<!-- Start Back to top -->
+<a href="#" class="back-to-top" id="back-to-top" style="display: none;"> <i class="mdi mdi-chevron-up"> </i> </a>
+<!-- End Back to top -->

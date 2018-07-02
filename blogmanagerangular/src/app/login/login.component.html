@@ -1,0 +1,92 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div class="login100-pic js-tilt" data-tilt="">
+        <img src="../../assets/login/images/img-01.png" alt="IMG">
+      </div>
+
+      <form class="login100-form validate-form">
+					<span class="login100-form-title">
+						Private Space
+					</span>
+        <div class="alert alert-danger alert-dismissible" *ngIf="loginStatus === false">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          Login Failed
+        </div>
+        <div class="alert alert-info alert-dismissible" *ngIf="userCreated === true">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          Account created successfully.
+        </div>
+
+
+        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+          <input class="input100" type="text" name="email" name="email" [(ngModel)]="username" placeholder="username">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" (click)="login()">
+            Login
+          </button>
+        </div>
+
+        <div class="text-center p-t-136">
+          <button class="txt2" (click)="newUser()">
+            Create your Account
+            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">New Comment</h3>
+            </div>
+            <div class="alert alert-danger alert-dismissible" *ngIf="incompleteUserData === true">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              Please fill all fields.
+            </div>
+            <div class="alert alert-danger alert-dismissible" *ngIf="usernameTaken === true">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              Username already taken.
+            </div>
+
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" ngNativeValidate>
+              <div class="box-body">
+                <div class="form-group">
+                  <p id="test"></p>
+                  <label>Name</label>
+                  <input type="text" class="form-control" name="Name" [(ngModel)]="User.name" required>
+                </div>
+                <div class="form-group">
+                  <label>Email address</label>
+                  <input type="email" class="form-control" [(ngModel)]="User.email" name="emailAddress" required>
+                </div>
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" [(ngModel)]="User.username" name="username" required>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="reset" class="btn btn-danger">Cancel</button>
+                <button type="submit" (click)="registerNewUser()" class="btn btn-primary pull-right">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
